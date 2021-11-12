@@ -2,7 +2,7 @@
  * A4988_Driver.h
  *
  *  Created on: Oct 6, 2021
- *      Author: LIN
+ *      Author: LYH
  */
 
 #ifndef INC_STEPMOTORPWM_H_
