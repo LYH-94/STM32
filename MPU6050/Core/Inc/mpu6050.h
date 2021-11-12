@@ -15,9 +15,9 @@
 #include "main.h"
 
 #define MPU6050_DEV_ADDR 		0xD0
-#define WHO_AM_I 				0x75
-#define PWR_MGMT_1 				0x6B
-#define SMPLRT_DIV 				0x19
+#define WHO_AM_I 			0x75
+#define PWR_MGMT_1 			0x6B
+#define SMPLRT_DIV 			0x19
 #define ACCEL_CONFIG 			0x1C
 #define ACCEL_XOUT_H 			0x3B
 #define GYRO_CONFIG 			0x1B
