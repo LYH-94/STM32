@@ -1,0 +1,7 @@
+mpu6050.c:29:9:mpu6050_Init_Correction	40	static
+mpu6050.c:58:6:mpu6050_AccelCorrection	48	static
+mpu6050.c:99:6:mpu6050_GyroCorrection	40	static
+mpu6050.c:135:6:mpu6050_AccelRead_Angle	48	static
+mpu6050.c:159:6:mpu6050_GyroRead_AngVel	40	static
+mpu6050.c:178:6:KalmanFilter_getAngle	64	static
+mpu6050.c:225:8:KalmanFilter_Algorithm	72	static
