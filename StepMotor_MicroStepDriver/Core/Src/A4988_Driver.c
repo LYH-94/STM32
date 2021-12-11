@@ -6,7 +6,6 @@
  */
 
 #include "A4988_Driver.h"
-#include "main.h"
 
 void StepMotorDriver_Iint(TIM_HandleTypeDef *htim)
 {
@@ -47,8 +46,8 @@ void StepMotorDriver_Iint(TIM_HandleTypeDef *htim)
 		break;
 	}
 
-	__HAL_TIM_SET_PRESCALER(htim, PWM_PSC);
 	//printf("PWM_PSC = %d\n", PWM_PSC);
+	__HAL_TIM_SET_PRESCALER(htim, PWM_PSC);
 }
 
 /**
@@ -61,23 +60,23 @@ void StepMotorDriver_Iint(TIM_HandleTypeDef *htim)
   * param - degree ： Motor rotation angle (unit:degree)
   * return - step
   */
-uint32_t StepMotor_Control(TIM_HandleTypeDef *htim, float angular_velocity, float degree)
+uint32_t StepMotor_Control(TIM_HandleTypeDef *htim, double angular_velocity, double degree)
 {
-	if(degree < 0)
+	if(angular_velocity < 0)
 	{
 		HAL_GPIO_WritePin(GPIOA, PA9_DIR_Pin, GPIO_PIN_RESET);
-		degree = -degree;
+		angular_velocity = -angular_velocity;
 	}
 	else
 		HAL_GPIO_WritePin(GPIOA, PA9_DIR_Pin, GPIO_PIN_SET);
 
-	if(angular_velocity < 1.71661376953125) angular_velocity = 1.71661376953125;
-	if(angular_velocity > 1081.7307692307692307692307692308) angular_velocity = 1081.7307692307692307692307692308;
-	uint16_t PWM_ARR = lroundf(1000000/(angular_velocity/(1.8/MICRO_STEP_RESOLUTION)))-1;
-	if(PWM_ARR < 103) PWM_ARR = 103;
+	if(angular_velocity < 1.502) angular_velocity = 1.502;
+	if(angular_velocity > 1081.73) angular_velocity = 1081.73;
+	uint16_t PWM_ARR = lroundf((PWM_TIMER_CLOCKS/(PWM_PSC+1))/(angular_velocity/(1.8/MICRO_STEP_RESOLUTION)))-1;
+	if(PWM_ARR < 90) PWM_ARR = 90;
 	if(PWM_ARR > 65535) PWM_ARR = 65535;
-	//printf("PWM_ARR = %d\n", PWM_ARR);
 
+	//printf("PWM_ARR = %d\n", PWM_ARR);
 	__HAL_TIM_SET_AUTORELOAD(htim, PWM_ARR);
 	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_1, (__HAL_TIM_GET_AUTORELOAD(htim) + 1)/2);
 

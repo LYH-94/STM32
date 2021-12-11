@@ -115,7 +115,8 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	while(g_count > 0)
 	{
-		g_step = StepMotor_Control(&htim2, 1080, 1080);  // test 1080 deg/sec, 1080deg
+		// StepMotor_Control(TIMx, (unit:deg/sec ,>0 = forward; <0 = reverse), (unit:deg))
+		g_step = StepMotor_Control(&htim2, 1080.0, 1080.0);  // test 1080.0 deg/sec, 1080.0 deg
 		g_count = 0;
 	}
 

@@ -13,11 +13,12 @@
 #endif /* INC_MPU6050_H_ */
 
 #include "main.h"
+#include <math.h>
 
 #define MPU6050_DEV_ADDR 		0xD0
-#define WHO_AM_I 			0x75
-#define PWR_MGMT_1 			0x6B
-#define SMPLRT_DIV 			0x19
+#define WHO_AM_I 				0x75
+#define PWR_MGMT_1 				0x6B
+#define SMPLRT_DIV 				0x19
 #define ACCEL_CONFIG 			0x1C
 #define ACCEL_XOUT_H 			0x3B
 #define GYRO_CONFIG 			0x1B
@@ -57,7 +58,6 @@ typedef struct
 } KalmanFilter_HandleTypeDef;
 
 uint8_t mpu6050_Init_Correction(I2C_HandleTypeDef *hi2c,  MPU6050_HandleTypeDef *data_struct);
-void mpu6050_AccelCorrection(I2C_HandleTypeDef *hi2c, MPU6050_HandleTypeDef *data_struct);
 void mpu6050_GyroCorrection(I2C_HandleTypeDef *hi2c, MPU6050_HandleTypeDef *data_struct);
 
 void mpu6050_AccelRead_Angle(I2C_HandleTypeDef *hi2c, MPU6050_HandleTypeDef *data_struct);
