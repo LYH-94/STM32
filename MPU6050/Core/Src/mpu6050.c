@@ -84,15 +84,15 @@ void mpu6050_GyroCorrection(I2C_HandleTypeDef *hi2c, MPU6050_HandleTypeDef *data
 	    data_struct->Gyro_Y_AngVel = data_struct->Gyro_Y_RAW / 131.0;
 	    data_struct->Gyro_Z_AngVel = data_struct->Gyro_Z_RAW / 131.0;
 
-		Correction_Gyro_X_AngVel += data_struct->Gyro_X_AngVel;
-		Correction_Gyro_Y_AngVel += data_struct->Gyro_Y_AngVel;
-		Correction_Gyro_Z_AngVel += data_struct->Gyro_Z_AngVel;
-		count ++;
-		HAL_Delay (100);
-		printf("count = %d  ,  ", count);
-		printf("Correction_Gyro_X_AngVel = %f  ,  ", Correction_Gyro_X_AngVel);
-		printf("Correction_Gyro_Y_AngVel = %f  ,  ", Correction_Gyro_Y_AngVel);
-		printf("Correction_Gyro_Z_AngVel = %f\r\n", Correction_Gyro_Z_AngVel);
+	    Correction_Gyro_X_AngVel += data_struct->Gyro_X_AngVel;
+	    Correction_Gyro_Y_AngVel += data_struct->Gyro_Y_AngVel;
+	    Correction_Gyro_Z_AngVel += data_struct->Gyro_Z_AngVel;
+	    count ++;
+	    HAL_Delay (100);
+	    printf("count = %d  ,  ", count);
+	    printf("Correction_Gyro_X_AngVel = %f  ,  ", Correction_Gyro_X_AngVel);
+	    printf("Correction_Gyro_Y_AngVel = %f  ,  ", Correction_Gyro_Y_AngVel);
+	    printf("Correction_Gyro_Z_AngVel = %f\r\n", Correction_Gyro_Z_AngVel);
 	}
 
 	Correction_Gyro_X_AngVel /= 50.0;
@@ -117,14 +117,14 @@ void mpu6050_AccelRead_Angle(I2C_HandleTypeDef *hi2c, MPU6050_HandleTypeDef *dat
     data_struct->Accel_Y = data_struct->Accel_Y_RAW / 16384.0;
     data_struct->Accel_Z = data_struct->Accel_Z_RAW / 16384.0;
 
-	R = sqrt((data_struct->Accel_X)*(data_struct->Accel_X) + (data_struct->Accel_Y)*(data_struct->Accel_Y) + (data_struct->Accel_Z)*(data_struct->Accel_Z));
-	data_struct->Accel_X_Angle = (acos((data_struct->Accel_X)/R)*57.2957795131);
-	data_struct->Accel_Y_Angle = (acos((data_struct->Accel_Y)/R)*57.2957795131);
-	data_struct->Accel_Z_Angle = (acos((data_struct->Accel_Z)/R)*57.2957795131);
+    R = sqrt((data_struct->Accel_X)*(data_struct->Accel_X) + (data_struct->Accel_Y)*(data_struct->Accel_Y) + (data_struct->Accel_Z)*(data_struct->Accel_Z));
+    data_struct->Accel_X_Angle = (acos((data_struct->Accel_X)/R)*57.2957795131);
+    data_struct->Accel_Y_Angle = (acos((data_struct->Accel_Y)/R)*57.2957795131);
+    data_struct->Accel_Z_Angle = (acos((data_struct->Accel_Z)/R)*57.2957795131);
 
-	printf("Accel_X_Angle = %f  ,  ", data_struct->Accel_X_Angle);
-	printf("Accel_Y_Angle = %f  ,  ", data_struct->Accel_Y_Angle);
-	printf("Accel_Z_Angle = %f\r\n", data_struct->Accel_Z_Angle);
+    printf("Accel_X_Angle = %f  ,  ", data_struct->Accel_X_Angle);
+    printf("Accel_Y_Angle = %f  ,  ", data_struct->Accel_Y_Angle);
+    printf("Accel_Z_Angle = %f\r\n", data_struct->Accel_Z_Angle);
 }
 
 void mpu6050_GyroRead_AngVel(I2C_HandleTypeDef *hi2c, MPU6050_HandleTypeDef *data_struct)
@@ -141,9 +141,9 @@ void mpu6050_GyroRead_AngVel(I2C_HandleTypeDef *hi2c, MPU6050_HandleTypeDef *dat
     data_struct->Gyro_Y_AngVel = (data_struct->Gyro_Y_RAW / 131.0) - Correction_Gyro_Y_AngVel;
     data_struct->Gyro_Z_AngVel = (data_struct->Gyro_Z_RAW / 131.0) - Correction_Gyro_Z_AngVel;
 
-	printf("Gyro_X_AngVel = %f  ,  ", data_struct->Gyro_X_AngVel);
-	printf("Gyro_Y_AngVel = %f  ,  ", data_struct->Gyro_Y_AngVel);
-	printf("Gyro_Z_AngVel = %f\r\n", data_struct->Gyro_Z_AngVel);
+    printf("Gyro_X_AngVel = %f  ,  ", data_struct->Gyro_X_AngVel);
+    printf("Gyro_Y_AngVel = %f  ,  ", data_struct->Gyro_Y_AngVel);
+    printf("Gyro_Z_AngVel = %f\r\n", data_struct->Gyro_Z_AngVel);
 }
 
 void KalmanFilter_getAngle(I2C_HandleTypeDef *hi2c, MPU6050_HandleTypeDef *data_struct)
@@ -162,30 +162,30 @@ void KalmanFilter_getAngle(I2C_HandleTypeDef *hi2c, MPU6050_HandleTypeDef *data_
     data_struct->Accel_Y = data_struct->Accel_Y_RAW / 16384.0;
     data_struct->Accel_Z = data_struct->Accel_Z_RAW / 16384.0;
 
-	R = sqrt((data_struct->Accel_X)*(data_struct->Accel_X) + (data_struct->Accel_Y)*(data_struct->Accel_Y) + (data_struct->Accel_Z)*(data_struct->Accel_Z));
-	data_struct->Accel_X_Angle = (acos((data_struct->Accel_X)/R)*57.2957795131);
-	data_struct->Accel_Y_Angle = (acos((data_struct->Accel_Y)/R)*57.2957795131);
-	data_struct->Accel_Z_Angle = (acos((data_struct->Accel_Z)/R)*57.2957795131);
+    R = sqrt((data_struct->Accel_X)*(data_struct->Accel_X) + (data_struct->Accel_Y)*(data_struct->Accel_Y) + (data_struct->Accel_Z)*(data_struct->Accel_Z));
+    data_struct->Accel_X_Angle = (acos((data_struct->Accel_X)/R)*57.2957795131);
+    data_struct->Accel_Y_Angle = (acos((data_struct->Accel_Y)/R)*57.2957795131);
+    data_struct->Accel_Z_Angle = (acos((data_struct->Accel_Z)/R)*57.2957795131);
 
-	//printf("Accel_X_Angle = %f  ,  ", data_struct->Accel_X_Angle);
-	//printf("Accel_Y_Angle = %f  ,  ", data_struct->Accel_Y_Angle);
-	//printf("Accel_Z_Angle = %f  ,  ", data_struct->Accel_Z_Angle);
+    //printf("Accel_X_Angle = %f  ,  ", data_struct->Accel_X_Angle);
+    //printf("Accel_Y_Angle = %f  ,  ", data_struct->Accel_Y_Angle);
+    //printf("Accel_Z_Angle = %f  ,  ", data_struct->Accel_Z_Angle);
 
-	// Temperature ============================================================
-	temperature_RAW = (int16_t)(raw_data[6] << 8 | raw_data[7]);
+    // Temperature ============================================================
+    temperature_RAW = (int16_t)(raw_data[6] << 8 | raw_data[7]);
 
-	// Gyroscope (Angular Velocity Meter) ============================================================
-	data_struct->Gyro_X_RAW = (int16_t)(raw_data[8] << 8 | raw_data[9]);
-	data_struct->Gyro_Y_RAW = (int16_t)(raw_data[10] << 8 | raw_data[11]);
-	data_struct->Gyro_Z_RAW = (int16_t)(raw_data[12] << 8 | raw_data[13]);
+    // Gyroscope (Angular Velocity Meter) ============================================================
+    data_struct->Gyro_X_RAW = (int16_t)(raw_data[8] << 8 | raw_data[9]);
+    data_struct->Gyro_Y_RAW = (int16_t)(raw_data[10] << 8 | raw_data[11]);
+    data_struct->Gyro_Z_RAW = (int16_t)(raw_data[12] << 8 | raw_data[13]);
 
-	data_struct->Gyro_X_AngVel = (data_struct->Gyro_X_RAW / 131.0) - Correction_Gyro_X_AngVel;
-	data_struct->Gyro_Y_AngVel = (data_struct->Gyro_Y_RAW / 131.0) - Correction_Gyro_Y_AngVel;
-	data_struct->Gyro_Z_AngVel = (data_struct->Gyro_Z_RAW / 131.0) - Correction_Gyro_Z_AngVel;
+    data_struct->Gyro_X_AngVel = (data_struct->Gyro_X_RAW / 131.0) - Correction_Gyro_X_AngVel;
+    data_struct->Gyro_Y_AngVel = (data_struct->Gyro_Y_RAW / 131.0) - Correction_Gyro_Y_AngVel;
+    data_struct->Gyro_Z_AngVel = (data_struct->Gyro_Z_RAW / 131.0) - Correction_Gyro_Z_AngVel;
 
-	//printf("Gyro_X_AngVel = %f  ,  ", data_struct->Gyro_X_AngVel);
-	//printf("Gyro_Y_AngVel = %f  ,  ", data_struct->Gyro_Y_AngVel);
-	//printf("Gyro_Z_AngVel = %f\r\n", data_struct->Gyro_Z_AngVel);
+    //printf("Gyro_X_AngVel = %f  ,  ", data_struct->Gyro_X_AngVel);
+    //printf("Gyro_Y_AngVel = %f  ,  ", data_struct->Gyro_Y_AngVel);
+    //printf("Gyro_Z_AngVel = %f\r\n", data_struct->Gyro_Z_AngVel);
 
     double dt = (double)(HAL_GetTick() - timer) / 1000;
     timer = HAL_GetTick();

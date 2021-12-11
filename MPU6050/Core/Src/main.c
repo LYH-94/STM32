@@ -115,14 +115,14 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-	// Accelerometer
-	//mpu6050_AccelRead_Angle(&hi2c1, &MPU6050);
+    // Accelerometer
+    //mpu6050_AccelRead_Angle(&hi2c1, &MPU6050);
 
-	// Gyroscope (Angular Velocity Meter)
-	//mpu6050_GyroRead_AngVel(&hi2c1, &MPU6050);
+    // Gyroscope (Angular Velocity Meter)
+    //mpu6050_GyroRead_AngVel(&hi2c1, &MPU6050);
 
-	KalmanFilter_getAngle(&hi2c1, &MPU6050);
-	HAL_Delay (10);
+    KalmanFilter_getAngle(&hi2c1, &MPU6050);
+    HAL_Delay (10);
 
   }
   /* USER CODE END 3 */
